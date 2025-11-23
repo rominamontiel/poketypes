@@ -1,0 +1,210 @@
+//BLANCOS
+$color-white-100: rgb(255, 255, 255);
+$color-white-90: rgba(255, 255, 255, 0.9);
+$color-white-80: rgba(255, 255, 255, 0.8);
+$color-white-70: rgba(255, 255, 255, 0.7);
+$color-white-60: rgba(255, 255, 255, 0.6);
+$color-white-50: rgba(255, 255, 255, 0.5);
+$color-white-40: rgba(255, 255, 255, 0.4);
+$color-white-30: rgba(255, 255, 255, 0.3);
+$color-white-20: rgba(255, 255, 255, 0.2);
+$color-white-15: rgba(255, 255, 255, 0.15);
+$color-white-10: rgba(255, 255, 255, 0.1);
+
+//NEGROS
+$color-black-900: #070d12;
+$color-black-800: #0a1219;
+
+//ERROR
+$color-error-300: #bc5757;
+
+//TIPOS - COLORES SÓLIDOS
+$color-type-solid-acero: #5595a3;
+$color-type-solid-agua: #60ade1;
+$color-type-solid-bicho: #a0c132;
+$color-type-solid-dragon: #0577c7;
+$color-type-solid-electrico: #f0d748;
+$color-type-solid-fantasma: #6d71c9;
+$color-type-solid-fuego: #fa9f4e;
+$color-type-solid-hada: #ee94e5;
+$color-type-solid-hielo: #7ad3c5;
+$color-type-solid-lucha: #d5425c;
+$color-type-solid-normal: #959aa3;
+$color-type-solid-planta: #5cbf67;
+$color-type-solid-psiquico: #fb8681;
+$color-type-solid-roca: #ccbd8b;
+$color-type-solid-siniestro: #666978;
+$color-type-solid-tierra: #d68757;
+$color-type-solid-veneno: #ba62d0;
+$color-type-solid-volador: #9eb9ea;
+
+//TIPOS - LINEAR GRADIENT
+$color-type-gradient-acero: linear-gradient(180deg, #52869d 0%, #58a6aa 100%);
+$color-type-gradient-agua: linear-gradient(180deg, #4a90dd 0%, #6cbde4 100%);
+$color-type-gradient-bicho: linear-gradient(180deg, #92bc2c 0%, #afc836 100%);
+$color-type-gradient-dragon: linear-gradient(
+  180deg,
+  #0c69c8 0%,
+  #0180c7 98.71%
+);
+$color-type-gradient-electrico: linear-gradient(
+  180deg,
+  #edd53e 0%,
+  #fbe273 98.71%
+);
+$color-type-gradient-fantasma: linear-gradient(
+  180deg,
+  #516aac 0%,
+  #7773d4 98.71%
+);
+$color-type-gradient-fuego: linear-gradient(180deg, #fb9b51 0%, #fbae46 100%);
+$color-type-gradient-hada: linear-gradient(180deg, #ec8ce5 0%, #f3a7e7 98.36%);
+$color-type-gradient-hielo: linear-gradient(180deg, #70ccbd 0%, #8cddd4 100%);
+$color-type-gradient-lucha: linear-gradient(180deg, #ce4265 0%, #e74347 98.71%);
+$color-type-gradient-normal: linear-gradient(
+  180deg,
+  #9298a4 0%,
+  #a3a49e 98.71%
+);
+$color-type-gradient-planta: linear-gradient(180deg, #5fbc51 0%, #5ac178 100%);
+$color-type-gradient-psiquico: linear-gradient(
+  180deg,
+  #f66f71 0%,
+  #fe9f92 100%
+);
+$color-type-gradient-roca: linear-gradient(180deg, #c5b489 0%, #d7cd90 100%);
+$color-type-gradient-siniestro: linear-gradient(
+  180deg,
+  #595761 0%,
+  #6e7587 98.71%
+);
+$color-type-gradient-tierra: linear-gradient(
+  180deg,
+  #dc7545 0%,
+  #d29463 98.71%
+);
+$color-type-gradient-veneno: linear-gradient(180deg, #a864c7 0%, #c261d4 100%);
+$color-type-gradient-volador: linear-gradient(180deg, #90a7da 0%, #a6c2f2 100%);
+
+//MAPA DE TIPOS
+// $types: (
+//   agua: $color-type-solid-agua,
+//   bicho: $color-type-solid-bicho,
+//   dragon: $color-type-solid-dragon,
+//   electrico: $color-type-solid-electrico,
+//   fantasma: $color-type-solid-fantasma,
+//   fuego: $color-type-solid-fuego,
+//   hada: $color-type-solid-hada,
+//   hielo: $color-type-solid-hielo,
+//   lucha: $color-type-solid-lucha,
+//   normal: $color-type-solid-normal,
+//   planta: $color-type-solid-planta,
+//   psiquico: $color-type-solid-psiquico,
+//   roca: $color-type-solid-roca,
+//   acero: $color-type-solid-acero,
+//   siniestro: $color-type-solid-siniestro,
+//   tierra: $color-type-solid-tierra,
+//   veneno: $color-type-solid-veneno,
+//   volador: $color-type-solid-volador,
+// );
+
+//------------------------------------
+//MAPEO PARA AUTOMATIZACIÓN DE CLASES 
+//------------------------------------
+
+$types: (
+  agua: (
+    solid: $color-type-solid-agua,
+    gradient: $color-type-gradient-agua,
+  ),
+  bicho: (
+    solid: $color-type-solid-bicho,
+    gradient: $color-type-gradient-bicho,
+  ),
+  dragon: (
+    solid: $color-type-solid-dragon,
+    gradient: $color-type-gradient-dragon,
+  ),
+  electrico: (
+    solid: $color-type-solid-electrico,
+    gradient: $color-type-gradient-electrico,
+  ),
+  fantasma: (
+    solid: $color-type-solid-fantasma,
+    gradient: $color-type-gradient-fantasma,
+  ),
+  fuego: (
+    solid: $color-type-solid-fuego,
+    gradient: $color-type-gradient-fuego,
+  ),
+  hada: (
+    solid: $color-type-solid-hada,
+    gradient: $color-type-gradient-hada,
+  ),
+  hielo: (
+    solid: $color-type-solid-hielo,
+    gradient: $color-type-gradient-hielo,
+  ),
+  lucha: (
+    solid: $color-type-solid-lucha,
+    gradient: $color-type-gradient-lucha,
+  ),
+  normal: (
+    solid: $color-type-solid-normal,
+    gradient: $color-type-gradient-normal,
+  ),
+  planta: (
+    solid: $color-type-solid-planta,
+    gradient: $color-type-gradient-planta,
+  ),
+  psiquico: (
+    solid: $color-type-solid-psiquico,
+    gradient: $color-type-gradient-psiquico,
+  ),
+  roca: (
+    solid: $color-type-solid-roca,
+    gradient: $color-type-gradient-roca,
+  ),
+  acero: (
+    solid: $color-type-solid-acero,
+    gradient: $color-type-gradient-acero,
+  ),
+  siniestro: (
+    solid: $color-type-solid-siniestro,
+    gradient: $color-type-gradient-siniestro,
+  ),
+  tierra: (
+    solid: $color-type-solid-tierra,
+    gradient: $color-type-gradient-tierra,
+  ),
+  veneno: (
+    solid: $color-type-solid-veneno,
+    gradient: $color-type-gradient-veneno,
+  ),
+  volador: (
+    solid: $color-type-solid-volador,
+    gradient: $color-type-gradient-volador,
+  ),
+);
+
+@mixin bg-color($color) {
+  background: $color;
+}
+
+@mixin line-color($color) {
+  border-color: $color;
+}
+
+//FORMA DE USAR LOS TIPOS DINÁMICAMENTE: 
+//Crear clases para cada tipo y poder especificar más estilos
+.example {
+  @each $name, $typeKey in $types {
+    //crea example.agua , example.fuego, etc
+    &.#{$name} {
+      @include bg-color(map-get($typeKey, solid));
+    }
+  }
+}
+// $name es la key principal (agua, fuego, planta...)
+// $typeKey es la key interna "solid" o "gradient)
+// map-get( $typeKey, solid) devuelve la variable de color de solid x ej.

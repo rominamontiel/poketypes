@@ -1,0 +1,122 @@
+@import "../../styles/main.scss";
+
+* {
+  transition: all 0.15s ease-in-out;
+}
+
+section {
+  padding: $m-32 $m-16;
+  padding-bottom: $m-96;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
+
+  h2 {
+    text-align: center;
+    @extend .subheading-01-regular;
+    margin-bottom: $m-24;
+  }
+
+  .blur-light {
+    position: absolute;
+    @include user-select-none();
+    z-index: -1;
+    @include animation-opacity(0.3);
+
+    &.left {
+      left: -30%;
+      top: -20%;
+    }
+
+    &.right {
+      right: -40%;
+      top: 10%;
+    }
+  }
+
+  .types {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2vw 0;
+    margin-bottom: $m-32;
+
+    .badge {
+      @include display-flex(1, 1);
+      flex-direction: column;
+      gap: $m-8;
+      padding: $m-4;
+      @include animation-scale(0.5);
+      @include animation-child-delay;
+
+      p {
+        @extend .paragraph-01-regular;
+        color: $color-white-70;
+        text-transform: uppercase;
+        @include user-select-none();
+      }
+
+      &.some-selected {
+        opacity: 0.5 !important;
+      }
+
+      &.selected {
+        opacity: 1 !important;
+
+        p {
+          color: $color-white-100;
+          @extend .paragraph-01-medium;
+        }
+      }
+    }
+  }
+
+  //MENSAJE DE "NINGUN TIPO SELECCIONADO"
+  .empty {
+    width: 100%;
+    height: 250px;
+    @include display-flex(1, 1);
+    flex-direction: column;
+    gap: $m-24;
+    padding: $m-24;
+    @include animation-opacity(1.8);
+
+    icon {
+      opacity: 0.3;
+    }
+
+    p {
+      @extend .subheading-01-medium;
+      text-transform: uppercase;
+      color: $color-white-40;
+      text-align: center;
+    }
+  }
+
+  //UNO O DOS TIPOS SELECCIONADOS
+  .selected-container {
+    .list-container {
+      @include display-flex(false, false);
+      margin-top: $m-16;
+      gap: $m-16;
+
+      .list {
+        width: 50%;
+        max-width: 50%;
+        overflow-x: hidden;
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  section {
+    overflow-x: visible;
+    .selected-container {
+      .list-container {
+        margin-top: $m-24;
+        gap: $m-24;
+      }
+    }
+  }
+}

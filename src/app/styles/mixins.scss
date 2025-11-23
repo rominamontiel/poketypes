@@ -1,0 +1,131 @@
+// USO: @include {nombre}
+
+// Display flex
+@mixin display-flex($v: false, $h: false) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  @if $v {
+    align-items: center;
+  }
+  @if $h {
+    justify-content: center;
+  }
+}
+
+@mixin border-box {
+  -webkit-box-sizing: border-box; // WebKit antiguo
+  -moz-box-sizing: border-box; // Firefox antiguo
+  box-sizing: border-box; // estándar
+}
+
+@mixin user-select-none {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+@mixin user-drag-none {
+  -webkit-user-drag: none; // Safari, Chrome viejo
+  -moz-user-drag: none; // Firefox antiguo (muy raro)
+  -ms-user-drag: none; // IE / Edge antiguo
+  user-drag: none; // estándar (no todos lo soportan)
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+@mixin truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::placeholder {
+    @content;
+  }
+}
+// -------- EJEMPLO DE USO --------
+// input {
+//   @include placeholder {
+//     color: #999;
+//     font-size: .9rem;
+//   }
+// }
+
+//------------------------------------------
+//--------------- ANIMACIONES --------------
+//------------------------------------------
+
+@mixin animation-child-delay {
+  @for $i from 1 through 100 {
+    &:nth-child(#{$i}n) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+@mixin animation-opacity($time) {
+  opacity: 0;
+  animation: show-opacity #{$time}s ease-in-out forwards;
+}
+
+@mixin animation-movement($time) {
+  opacity: 0;
+  animation: show-movement #{$time}s ease-in-out forwards;
+}
+
+@mixin animation-scale($time) {
+  opacity: 0;
+  animation: show-scale #{$time}s ease-in-out forwards;
+}
+
+@keyframes show-opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes show-movement {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
+@keyframes show-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}

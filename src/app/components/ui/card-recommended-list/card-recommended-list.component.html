@@ -1,0 +1,20 @@
+<div class="card-recommended-list">
+  <div class="header">
+    <icon [name]="type === 'attack' ? ICONS.SWORDS : ICONS.SHIELD" [size]="24"></icon>
+    <div class="title">
+      <h2>{{title}}</h2>
+      <span>
+        (% de daño {{ type === "attack" ? "realizado" : "recibido" }})
+      </span>
+    </div>
+  </div>
+  <div class="list">
+    @for (item of list; track $index) {
+    <chip-type
+      [type]="item.type"
+      [highlighted]="item.highlighted"
+      [percentage]="item.percentage"
+    ></chip-type>
+    }
+  </div>
+</div>

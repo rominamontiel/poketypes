@@ -1,0 +1,7 @@
+@if (type) {
+<div class="chip {{ highlighted ? type : '' }}">
+  <badge-type [type]="type" [size]="40"></badge-type>
+  <p>{{ type }}</p>
+  <span>(@if (percentage >= 0) {+}{{ percentage }}%)</span>
+</div>
+}

@@ -1,0 +1,102 @@
+@import "../../../styles/main.scss";
+
+nav {
+  border-radius: $m-48;
+  border-top: 2px solid $color-white-15;
+  background: rgba($color: $color-black-800, $alpha: 0.5);
+  box-shadow: 0 1px 25px 0 #28353e;
+  backdrop-filter: blur($m-16);
+  height: 100%;
+  display: block;
+  @include display-flex(1, 1);
+  gap: $m-8;
+
+  a {
+    list-style: none;
+    text-decoration: none;
+
+    .item-nav {
+      height: $m-56;
+      width: $m-64;
+      @include display-flex(1, 1);
+      flex-direction: column;
+
+      icon {
+        opacity: 0.6;
+      }
+
+      span {
+        @extend .paragraph-02-regular;
+        text-transform: uppercase;
+        color: $color-white-60;
+        @include user-select-none;
+      }
+    }
+
+    &.active {
+      position: relative;
+
+      //RESPLANDOR
+      &::before {
+        content: "";
+        width: $m-40;
+        height: $m-48;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 14px;
+        background: rgba(189, 231, 255, 0.46);
+        filter: blur(25px);
+      }
+
+      .item-nav {
+        border-radius: $m-16;
+        border-top: 1px solid $color-white-20;
+        position: relative;
+        overflow: hidden;
+
+        //LUZ
+        &::after {
+          content: "";
+          width: $m-64;
+          height: $m-8;
+          position: absolute;
+          bottom: -3px;
+          border-radius: $m-16;
+          background: $color-white-10;
+          filter: blur(6px);
+        }
+
+        //LUZ 2
+        &::before {
+          content: "";
+          width: $m-32;
+          height: $m-16;
+          position: absolute;
+          bottom: -4px;
+          border-radius: $m-16;
+          background: rgba(189, 231, 255, 0.85);
+          filter: blur(12px);
+        }
+
+        icon {
+          opacity: 1;
+        }
+
+        span {
+          @extend .paragraph-02-medium;
+          color: $color-white-100;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  nav {
+    .item-nav {
+      cursor: pointer;
+    }
+  }
+}

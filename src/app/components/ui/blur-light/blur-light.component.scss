@@ -1,0 +1,15 @@
+@import "../../../styles/main.scss";
+
+.light {
+  height: 350px;
+  width: 350px;
+  border-radius: 350px;
+  filter: blur(190px);
+  display: block;
+
+  @each $name, $typeKey in $types {
+    &.#{$name} {
+      @include bg-color(map-get($typeKey, solid));
+    }
+  }
+}

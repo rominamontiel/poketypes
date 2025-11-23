@@ -1,0 +1,85 @@
+<section>
+  <h2>Elegí el tipo de pokemon de tu oponente</h2>
+
+  <!-- LUCES / DECORADO -->
+  @if (someSelected()) {
+  <div class="blur-light left">
+    <blur-light [type]="selected()"></blur-light>
+  </div>
+  <div class="blur-light right">
+    <blur-light [type]="selected()"></blur-light>
+  </div>
+  }
+
+  <!-- --------- SELECCIÓN DEL TIPO --------- -->
+  <div class="types">
+    @for (t of typeListFE; track $index) {
+    <div
+      class="badge"
+      (click)="selectType(t.type)"
+      [ngClass]="{ 'some-selected': someSelected(), selected: t.selected }"
+    >
+      <badge-type
+        [type]="t.type"
+        [size]="40"
+        [showGlow]="t.selected"
+        [showRing]="t.selected"
+      ></badge-type>
+      <p>{{ t.type }}</p>
+    </div>
+    }
+  </div>
+
+  <!-- ------ NINGUN TIPO SELECCIONADO ------ -->
+  @if (!someSelected()) {
+  <div class="empty">
+    <icon [name]="ICONS.TOUCH" [size]="48"></icon>
+    <p>
+      Seleccioná el tipo de pokemón de tu oponente para ver los mejores
+      atacantes y defensores
+    </p>
+  </div>
+
+  } @else {
+  <!-- ---------- TIPO SELECCIONADO ---------- -->
+  <div class="selected-container">
+    <div class="selected-type">
+      <card-selected-types [type]="selected()"></card-selected-types>
+    </div>
+    <!-- LISTA DE RECOMENDADOS -->
+    <div class="list-container">
+      <div class="list">
+        <card-recommended-list
+          [title]="'Atacar con'"
+          [type]="'attack'"
+          [list]="bestAttackers"
+        ></card-recommended-list>
+      </div>
+      <div class="list">
+        <card-recommended-list
+          [title]="'Defenderse con'"
+          [type]="'defense'"
+          [list]="bestDefenders"
+        ></card-recommended-list>
+      </div>
+    </div>
+    <!-- LISTA DE TIPOS A EVITAR -->
+    <div class="list-container">
+      <div class="list">
+        <card-avoid-list
+          [title]="'Evitar atacar con'"
+          [type]="'attack'"
+          [list]="poorAttackers"
+        ></card-avoid-list>
+      </div>
+      <div class="list">
+        <card-avoid-list
+          [title]="'Evitar defenderse con'"
+          [type]="'defense'"
+          [list]="poorDefenders"
+        ></card-avoid-list>
+      </div>
+    </div>
+  </div>
+  }
+</section>

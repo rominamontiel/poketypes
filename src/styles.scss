@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap");
+@import "./app/styles/main.scss";
+
+* {
+  @include border-box;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  position: relative;
+  background-color: $color-black-800;
+  color: $color-white-100;
+  overflow-x: hidden
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  @include user-select-none;
+  @include user-drag-none;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+//-------------SCROLLBAR-------------
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: $color-white-10;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: $color-white-20;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: $color-white-30;
+}
+::-webkit-scrollbar-thumb:active {
+  background: $color-white-40;
+}
+//-------------FIN SCROLLBAR-------------
+
+@media (max-width: 1024px) {
+  * {
+    cursor: default !important;
+  }
+}

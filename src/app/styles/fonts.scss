@@ -1,0 +1,104 @@
+//------TAMAÑOS DE FONT RESPONSIVES------
+:root {
+  --font-10: 10px;
+  --font-12: 12px;
+  --font-14: 14px;
+  --font-16: 16px;
+  --font-20: 20px;
+}
+@media (min-width: 800px) {
+  :root {
+    --font-10: 14px;
+    --font-12: 16px;
+    --font-14: 18px;
+    --font-16: 20px;
+    --font-20: 26px;
+  }
+}
+$font-10: var(--font-10);
+$font-12: var(--font-12);
+$font-14: var(--font-14);
+$font-16: var(--font-16);
+$font-20: var(--font-20);
+
+//------------FONTS FAMILY------------
+$font-afacad: "Afacad", sans-serif;
+
+//------------FONT WEIGHT------------
+$fw-bold: 700;
+$fw-semibold: 600;
+$fw-medium: 500;
+$fw-regular: 400;
+
+//------------------------------------------
+//--------MIXIN PARA DEFINIR ESTILOS--------
+//------------------------------------------
+@mixin fonts-style($font-family, $font-weight, $font-size, $line-height) {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: #{$line-height}px;
+}
+
+//------------------------------------------
+//-------MAP PARA MIXIN "FONTS-STYLE"-------
+//------------------------------------------
+$fonts-style: (
+  //HEADING
+  "heading-01-bold": ($font-afacad, $fw-bold, $font-20, 32),
+  "heading-01-semibold": ($font-afacad, $fw-semibold, $font-20, 32),
+  //SUBHEADING
+  "subheading-01-semibold": ($font-afacad, $fw-semibold, $font-16, 24),
+  "subheading-01-medium": ($font-afacad, $fw-medium, $font-16, 24),
+  "subheading-01-regular": ($font-afacad, $fw-regular, $font-16, 24),
+  "subheading-02-semibold": ($font-afacad, $fw-semibold, $font-14, 24),
+  "subheading-02-medium": ($font-afacad, $fw-medium, $font-14, 24),
+  "subheading-02-regular": ($font-afacad, $fw-regular, $font-14, 24),
+  //PARAGRAPH
+  "paragraph-01-semibold": ($font-afacad, $fw-semibold, $font-12, 16),
+  "paragraph-01-medium": ($font-afacad, $fw-medium, $font-12, 16),
+  "paragraph-01-regular": ($font-afacad, $fw-regular, $font-12, 16),
+  "paragraph-02-semibold": ($font-afacad, $fw-semibold, $font-10, 16),
+  "paragraph-02-medium": ($font-afacad, $fw-medium, $font-10, 16),
+  "paragraph-02-regular": ($font-afacad, $fw-regular, $font-10, 16)
+);
+
+//------------------------------------------
+//-------ARMAR LAS CLASES PARA EXTEND-------
+//------------------------------------------
+
+//RECORRE $fonts-style CON [KEY:VALUE]
+@each $style-name, $style-values in $fonts-style {
+  .#{$style-name} {
+    @include fonts-style(
+      nth($style-values, 1),
+      nth($style-values, 2),
+      nth($style-values, 3),
+      nth($style-values, 4)
+    );
+  }
+}
+
+//------------------------------------------
+//--------------EJEMPLO DE USO--------------
+//------------------------------------------
+
+// HEADING 
+// @extend .heading-01-bold;
+// @extend .heading-01-semibold;
+
+// SUBHEADING
+// @extend .subheading-01-semibold;
+// @extend .subheading-01-medium;
+// @extend .subheading-01-regular;
+// @extend .subheading-02-semibold;
+// @extend .subheading-02-medium;
+// @extend .subheading-02-regular;
+
+// PARAGRAPH
+// @extend .paragraph-01-semibold;
+// @extend .paragraph-01-medium;
+// @extend .paragraph-01-regular;
+// @extend .paragraph-02-semibold;
+// @extend .paragraph-02-medium;
+// @extend .paragraph-02-regular;

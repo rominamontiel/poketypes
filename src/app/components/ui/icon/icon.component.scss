@@ -1,0 +1,46 @@
+@import "../../../styles/main.scss";
+
+.icon {
+  height: $m-24;
+  width: $m-24;
+
+  &.size-16 {
+    height: $m-16;
+    width: $m-16;
+  }
+
+  &.size-24 {
+    height: $m-24;
+    width: $m-24;
+  }
+  
+  &.size-32 {
+    height: $m-32;
+    width: $m-32;
+  }
+
+  &.size-40 {
+    height: $m-40;
+    width: $m-40;
+  }
+
+  &.size-48 {
+    height: $m-48;
+    width: $m-48;
+  }
+
+  //SVG
+  img {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+}
+
+//EN CASO DE NO FUNCIONAR EL SVG DIRECTO, USAR:
+// .icon {
+//   height: $m-24;
+//   width: $m-24;
+//   background-image: url("/assets/icons/enemy.svg");
+//   background-size: $m-24;
+// }

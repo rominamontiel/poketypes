@@ -1,0 +1,12 @@
+<div class="badge {{ type }} size-{{ size }}">
+  <!-- GLOW -->
+  @if(showGlow) {
+  <div class="glow"></div>
+  }
+  <!-- RING -->
+  @if(showRing) {
+  <div class="ring"></div>
+  }
+  <!-- ICON -->
+  <icon [name]="type" [size]="iconSize()"></icon>
+</div>

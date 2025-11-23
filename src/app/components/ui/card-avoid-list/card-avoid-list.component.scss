@@ -1,0 +1,58 @@
+@import "../../../styles/main.scss";
+
+:host {
+  height: 100%;
+  display: block;
+  width: 100%;
+}
+
+.card-avoid-list {
+  width: 100%;
+  height: 100%;
+  border: 1px solid $color-white-20;
+  border-radius: $m-16;
+  overflow: hidden;
+
+  .header {
+    border-bottom: 1px solid $color-white-20;
+    padding: $m-8 ($m-8 + $m-4);
+    @include display-flex(1, false);
+    gap: $m-8;
+
+    .title {
+      h2 {
+        @extend .paragraph-01-semibold;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      span {
+        @extend .paragraph-02-regular;
+        color: $color-white-70;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .list {
+    padding: $m-16 ($m-8 + $m-4);
+    @include display-flex(1, 1);
+    flex-wrap: wrap;
+    gap: $m-16;
+
+    .type {
+        @include display-flex(1, 1);
+        flex-direction: column;
+
+      p {
+        @extend .paragraph-02-medium;
+        color: $color-white-70;
+        text-transform: uppercase;
+      }
+
+      span {
+        color: $color-error-300;
+        @extend .paragraph-02-medium;
+      }
+    }
+  }
+}

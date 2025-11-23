@@ -1,0 +1,38 @@
+<section>
+  <div class="type-enemy">
+    <p>Seleccione el tipo del enemigo:</p>
+    @for (item of types; track $index) {
+    <button class="type" (click)="selectEnemy(item)">{{ item }}</button> - }
+  </div>
+
+  <hr />
+
+  <h2>{{ enemySelected ?? 'Ninguno' }}</h2>
+  <div>
+    Mejores atacantes: @for (a of bestAttackers; track $index) { 🔹
+    {{ a.type }}: {{ getPercentage(a.damage) }} {{ a.highlighted ? "⭐" : "" }}
+    }
+  </div>
+  <p>------</p>
+
+  <div>
+    Mejores defensores: @for (item of bestDefenders; track $index) { 🔹
+    {{ item.type }}: {{ getPercentage(item.damage) }}
+    {{ item.highlighted ? "⭐" : "" }}
+    }
+  </div>
+  <p>------</p>
+
+  <div>
+    Peores atacantes: @for (item of poorAttackers; track $index) { 🔹
+    {{ item.type }}: {{ getPercentage(item.damage) }}
+    }
+  </div>
+  <p>------</p>
+
+  <div>
+    Peores defensores: @for (item of poorDefenders; track $index) { 🔹
+    {{ item.type }}: {{ getPercentage(item.damage) }}
+    }
+  </div>
+</section>

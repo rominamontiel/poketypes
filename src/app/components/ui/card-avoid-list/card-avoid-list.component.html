@@ -1,0 +1,26 @@
+<div class="card-avoid-list">
+  <div class="header">
+    <icon
+      [name]="type === 'attack' ? ICONS.BLOCK : ICONS.SHIELD_NO"
+      [size]="24"
+    ></icon>
+    <div class="title">
+      <h2>{{ title }}</h2>
+      <span>
+        (% de daño {{ type === "attack" ? "realizado" : "recibido" }})
+      </span>
+    </div>
+  </div>
+  <div class="list">
+    @for (item of list; track $index) {
+    <div class="type">
+      <badge-type [type]="item.type" [size]="24"></badge-type>
+      <p>{{ item.type }}</p>
+      <span>
+        @if (getPercentage(item.damage) > 0) {+}
+        {{ getPercentage(item.damage) }}%
+      </span>
+    </div>
+    }
+  </div>
+</div>

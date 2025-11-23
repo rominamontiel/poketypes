@@ -1,0 +1,19 @@
+@import "../../styles/main.scss";
+
+.main-layout {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .navbar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $m-96;
+    padding: $m-16 $m-24;
+  }
+}

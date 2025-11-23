@@ -1,0 +1,44 @@
+@import "../../../styles/main.scss";
+
+:host {
+  height: 100%;
+  display: block;
+  width: 100%;
+}
+
+.card-recommended-list {
+  width: 100%;
+  height: 100%;
+  background-color: $color-white-10;
+  border: 1px solid $color-white-20;
+  border-radius: $m-16;
+  overflow: hidden;
+
+  .header {
+    border-bottom: 1px solid $color-white-20;
+    padding: $m-16 ($m-8 + $m-4);
+    @include display-flex(1, false);
+    gap: $m-8;
+    height: $m-72;
+
+    .title {
+      h2 {
+        @extend .subheading-02-semibold;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      span {
+        @extend .paragraph-01-regular;
+        color: $color-white-70;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .list {
+    padding: $m-16 ($m-8 + $m-4);
+    @include display-flex(1, 1);
+    flex-direction: column;
+    gap: $m-16;
+  }
+}

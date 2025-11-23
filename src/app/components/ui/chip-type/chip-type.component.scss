@@ -1,0 +1,45 @@
+@import "../../../styles/main.scss";
+
+:host {
+  width: 100%;
+}
+
+.chip {
+  @include display-flex(1, false);
+  border-radius: $m-56;
+  border: 1px solid $color-white-20;
+  height: $m-40;
+  width: 100%;
+  gap: $m-8;
+  position: relative;
+  overflow: hidden;
+
+  p {
+    @extend .paragraph-02-medium;
+    text-transform: uppercase;
+    color: $color-white-100;
+    white-space: nowrap;
+  }
+
+  span {
+    color: $color-white-50;
+    @extend .paragraph-02-medium;
+    white-space: nowrap;
+  }
+
+  @each $name, $typeKey in $types {
+    &.#{$name} {
+      @include line-color(map-get($typeKey, solid));
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        @include bg-color(map-get($typeKey, gradient));
+        opacity: 0.3;
+        z-index: -1;
+      }
+    }
+  }
+}
