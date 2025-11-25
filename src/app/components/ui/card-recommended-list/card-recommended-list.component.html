@@ -1,13 +1,17 @@
 <div class="card-recommended-list">
   <div class="header">
-    <icon [name]="type === 'attack' ? ICONS.SWORDS : ICONS.SHIELD" [size]="24"></icon>
+    <icon
+      [name]="type === 'attack' ? ICONS.SWORDS : ICONS.SHIELD"
+      [size]="24"
+    ></icon>
     <div class="title">
-      <h2>{{title}}</h2>
+      <h2>{{ title }}</h2>
       <span>
         (% de daño {{ type === "attack" ? "realizado" : "recibido" }})
       </span>
     </div>
   </div>
+  @if (list.length > 0) {
   <div class="list">
     @for (item of list; track $index) {
     <chip-type
@@ -17,4 +21,7 @@
     ></chip-type>
     }
   </div>
+  } @else {
+  <div class="empty">Neutral para todos los tipos</div>
+  }
 </div>

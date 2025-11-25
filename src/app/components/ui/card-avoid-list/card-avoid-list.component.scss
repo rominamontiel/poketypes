@@ -40,8 +40,8 @@
     gap: $m-16;
 
     .type {
-        @include display-flex(1, 1);
-        flex-direction: column;
+      @include display-flex(1, 1);
+      flex-direction: column;
 
       p {
         @extend .paragraph-02-medium;
@@ -54,5 +54,12 @@
         @extend .paragraph-02-medium;
       }
     }
+  }
+
+  .empty {
+    @extend .subheading-02-regular;
+    color: $color-white-30;
+    padding: $m-16;
+    text-align: center;
   }
 }

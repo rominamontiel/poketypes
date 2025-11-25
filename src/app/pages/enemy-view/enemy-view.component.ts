@@ -10,6 +10,7 @@ import { ChipTypeComponent } from '../../components/ui/chip-type/chip-type.compo
 import { IconComponent } from '../../components/ui/icon/icon.component';
 import { TypeDamage, EFFECTIVENESS } from '../../core/models/effectiveness';
 import { LIST_TYPES, TYPES } from '../../core/models/types.model';
+import { ListChipModel } from '../../core/models/list-chip.model';
 
 @Component({
   selector: 'app-enemy-view',
@@ -21,8 +22,8 @@ import { LIST_TYPES, TYPES } from '../../core/models/types.model';
     BlurLightComponent,
     CardSelectedTypesComponent,
     CardRecommendedListComponent,
-    CardAvoidListComponent
-],
+    CardAvoidListComponent,
+  ],
   templateUrl: './enemy-view.component.html',
   styleUrl: './enemy-view.component.scss',
 })
@@ -46,55 +47,156 @@ export class EnemyViewComponent implements OnInit {
     return this.typeListFE.some((e) => e.selected);
   }
 
-  //DEVUELVE TIPO ELEGIDO
-  selected(): TYPES | undefined {
-    return this.typeListFE.find((e) => e.selected)?.type;
+  //DEVUELVE TIPOS ELEGIDO
+  selected(): TYPES[] {
+    const SELECTED = this.typeListFE.filter((e) => e.selected);
+    return SELECTED.map((e) => e.type);
+  }
+
+  clearSelection() {
+    this.typeListFE.map((e) => (e.selected = false));
   }
 
   //AL SELECCIONAR UN TIPO...
   selectType(type: TYPES) {
+    const T1: TYPES | undefined = this.selected()[0];
+    const T2: TYPES | undefined = this.selected()[1];
+
+    //NINGUNO SELECCIONADO
+    if (this.selected()?.length === 0) {
+      this.typeListFE.forEach((e) => (e.selected = e.type === type));
+      // 1 SELECCIONADO
+    } else if (this.selected()?.length === 1) {
+      this.typeListFE.forEach((e) => {
+        if (type === T1) {
+          e.selected = false;
+        } else if (type === e.type) e.selected = !e.selected;
+      });
+      // 2 SELECCIONADOS
+    } else if (this.selected()?.length === 2) {
+      this.typeListFE.forEach((e) => {
+        if (e.type === type && type === T1) e.selected = false;
+        if (e.type === type && type === T2) e.selected = false;
+      });
+    }
+
+    this.calcEffectiveness();
+  }
+
+  calcEffectiveness() {
     this.bestAttackers = [];
     this.poorAttackers = [];
     this.bestDefenders = [];
     this.poorDefenders = [];
 
-    this.typeListFE.forEach(
-      (t) => (t.selected = t.type === type && !t.selected)
-    );
-
-    EFFECTIVENESS.forEach((a) => {
-      a.defenders.forEach((d) => {
-        // Definir mejores atacantes
-        if (this.selected() === d.type && d.damage >= 1)
-          this.bestAttackers.push({
-            type: a.attacker,
-            percentage: this.getPercentage(d.damage),
-            highlighted: false,
-          });
-
-        //Definir peores atacantes
-        if (this.selected() === d.type && d.damage < 1)
-          this.poorAttackers.push({
-            type: a.attacker,
-            damage: d.damage,
-          });
-
-        //Mejores defensores
-        if (a.attacker === this.selected() && d.damage < 1)
-          this.bestDefenders.push({
-            type: d.type,
-            percentage: this.getPercentage(d.damage),
-            highlighted: false,
-          });
-
-        //Peores defensores
-        if (a.attacker === this.selected() && d.damage >= 1)
-          this.poorDefenders.push({
-            type: d.type,
-            damage: d.damage,
-          });
+    // -------------------------------------------
+    // -------- SOLO UN TIPO SELECCIONADO --------
+    // -------------------------------------------
+    if (this.selected().length === 1) {
+      const TYPE_SELECTED = this.selected()[0];
+      EFFECTIVENESS.forEach((a) => {
+        a.defenders.forEach((d) => {
+          // Definir mejores atacantes
+          if (TYPE_SELECTED === d.type && d.damage >= 1)
+            this.bestAttackers.push({
+              type: a.attacker,
+              percentage: this.getPercentage(d.damage),
+              highlighted: false,
+            });
+          //Definir peores atacantes
+          if (TYPE_SELECTED === d.type && d.damage < 1)
+            this.poorAttackers.push({
+              type: a.attacker,
+              damage: d.damage,
+            });
+          //Mejores defensores
+          if (a.attacker === TYPE_SELECTED && d.damage < 1)
+            this.bestDefenders.push({
+              type: d.type,
+              percentage: this.getPercentage(d.damage),
+              highlighted: false,
+            });
+          //Peores defensores
+          if (a.attacker === TYPE_SELECTED && d.damage >= 1)
+            this.poorDefenders.push({
+              type: d.type,
+              damage: d.damage,
+            });
+        });
       });
-    });
+      // -------------------------------------------
+      // --------- DOS TIPOS SELECCIONADOS ---------
+      // -------------------------------------------
+    } else if (this.selected().length === 2) {
+      const T1: TYPES = this.selected()[0];
+      const T2: TYPES = this.selected()[1];
+
+      const INTERSECTION = (list1: TypeDamage[], list2: TypeDamage[]) => {
+        const LIST2_STRINGS = list2.map((e) => e.type);
+        return list1.filter((e) => LIST2_STRINGS.includes(e.type));
+      };
+
+      //------------Mejores-Peores defensores------------
+      let resistT1: TypeDamage[] = [];
+      let poorResistT1: TypeDamage[] = [];
+      let resistT2: TypeDamage[] = [];
+      let poorResistT2: TypeDamage[] = [];
+
+      EFFECTIVENESS.forEach((e) => {
+        if (e.attacker === T1) {
+          e.defenders.forEach((d) => {
+            if (d.damage < 1) resistT1.push(d);
+            if (d.damage > 1) poorResistT1.push(d);
+          });
+        }
+        if (e.attacker === T2) {
+          e.defenders.forEach((d) => {
+            if (d.damage < 1) resistT2.push(d);
+            if (d.damage > 1) poorResistT2.push(d);
+          });
+        }
+      });
+      //Defino Mejores defensores
+      INTERSECTION(resistT1, resistT2).forEach((e) => {
+        const ITEM: ListChipModel = {
+          type: e.type,
+          highlighted: false,
+          percentage: this.getPercentage(e.damage),
+        };
+        this.bestDefenders.push(ITEM);
+      });
+      //Defino Defensores no recomendados
+      this.poorDefenders = INTERSECTION(poorResistT1, poorResistT2);
+
+      //--------------MEJORES/PEORES ATACANQUES--------------
+
+      //Nueva lista de efectividades para los tipo1 y tipo2 en simultáneo
+      let attackers: TypeDamage[] = [];
+
+      EFFECTIVENESS.forEach((e) => {
+        let damage_t1 = 1;
+        let damage_t2 = 1;
+        e.defenders.forEach((d) => {
+          if (d.type === T1) damage_t1 = d.damage;
+          if (d.type === T2) damage_t2 = d.damage;
+        });
+        attackers.push({
+          type: e.attacker,
+          damage: damage_t1 * damage_t2,
+        });
+      });
+
+      attackers.forEach((a) => {
+        if (a.damage > 1)
+          this.bestAttackers.push({
+            type: a.type,
+            highlighted: false,
+            percentage: this.getPercentage(a.damage),
+          });
+        if (a.damage < 1) this.poorAttackers.push(a);
+      });
+    }
+
     this.sortAndSethighlighted();
   }
 

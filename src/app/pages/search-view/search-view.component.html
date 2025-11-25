@@ -1,24 +1,136 @@
+<section>
+  <h2 class="intro-text">Buscar por el nombre del pokemon</h2>
 
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
+  <!-- --------- BUSCAR UN POKEMON --------- -->
+  <div class="input-container">
+    <icon [name]="ICONS.SEARCH" class="icon-search"></icon>
+    @if(pokemonSelected){
+    <icon [name]="ICONS.CLOSE" class="icon-close" (click)="clearInput()"></icon
+    >}
+    <input
+      type="text"
+      placeholder="Escribe el nombre..."
+      (focusin)="showListResults = true"
+      (focusout)="showListResults = false"
+      (input)="inputTextChanges($event)"
+      [value]="pokemonSelected?.name"
+    />
 
-<h1 style="text-align: center;">🚧</h1>
+    <!-------- DESPLEGABLE AUTOCOMPLETE -------->
+    @if (showListResults && filteredlist().length>0) {
+    <div class="results">
+      @for (name of filteredlist(); track $index) {
+      <p (click)="inputSelectPokemon(name)">{{ name }}</p>
+      }
+    </div>
+    }
+  </div>
 
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
+  <!-- LUCES / DECORADO -->
+  @if (pokemonSelected) {
+  <div class="blur-light left">
+    <blur-light [type]="pokemonSelected.types[0]"></blur-light>
+  </div>
+  <div class="blur-light right">
+    <blur-light
+      [type]="
+        pokemonSelected.types.length === 2
+          ? pokemonSelected.types[1]
+          : pokemonSelected.types[0]
+      "
+    ></blur-light>
+  </div>
+  }
+
+  <!-- ------ NINGUN TIPO SELECCIONADO ------ -->
+  @if (!pokemonSelected) {
+  <div class="empty">
+    <icon [name]="ICONS.SEARCH" [size]="48"></icon>
+    <p>
+      Buscá el nombre de un pokemon en el buscador para conocer sus debilidades
+    </p>
+  </div>
+
+  } @else {
+  <!-- ---------- TIPO SELECCIONADO ---------- -->
+  <div class="selected-container">
+    <!-- SELECCIONADO -->
+    <div class="selected-type">
+      <div class="header">
+        <h2>{{ pokemonSelected.name }}</h2>
+        <span>#{{ pokemonSelected.id }}</span>
+      </div>
+      <div class="profile">
+        <img
+          src="assets/img/sprites/{{ pokemonSelected.id }}.png"
+          alt=""
+          (error)="onImageError($event)"
+        />
+      </div>
+      <div class="types">
+        <!-- Primer tipo -->
+        @if(pokemonSelected && pokemonSelected.types.length > 0){
+        <div class="type">
+          <badge-type
+            [type]="pokemonSelected.types[0]"
+            [showRing]="true"
+            [showGlow]="true"
+            [size]="32"
+          ></badge-type>
+          <span>{{ pokemonSelected.types[0] }}</span>
+        </div>
+        } @if(pokemonSelected && pokemonSelected.types.length > 1){
+        <!-- Barra -->
+        <div class="slash">/</div>
+
+        <!-- Segundo tipo -->
+        <div class="type">
+          <badge-type
+            [type]="pokemonSelected.types[1]"
+            [showRing]="true"
+            [showGlow]="true"
+            [size]="32"
+          ></badge-type>
+          <span>{{ pokemonSelected.types[1] }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    <!-- LISTA DE RECOMENDADOS -->
+    <div class="list-container">
+      <div class="list">
+        <card-recommended-list
+          [title]="'Atacar con'"
+          [type]="'attack'"
+          [list]="bestAttackers"
+        ></card-recommended-list>
+      </div>
+      <div class="list">
+        <card-recommended-list
+          [title]="'Defenderse con'"
+          [type]="'defense'"
+          [list]="bestDefenders"
+        ></card-recommended-list>
+      </div>
+    </div>
+    <!-- LISTA DE TIPOS A EVITAR -->
+    <div class="list-container">
+      <div class="list">
+        <card-avoid-list
+          [title]="'Evitar atacar con'"
+          [type]="'attack'"
+          [list]="poorAttackers"
+        ></card-avoid-list>
+      </div>
+      <div class="list">
+        <card-avoid-list
+          [title]="'Evitar defenderse con'"
+          [type]="'defense'"
+          [list]="poorDefenders"
+        ></card-avoid-list>
+      </div>
+    </div>
+  </div>
+  }
+</section>
+@if (isLoading) {<loader-fullscreen></loader-fullscreen>}

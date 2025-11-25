@@ -1,17 +1,22 @@
 <div class="card-selected-type">
+  @if(isTitleVisible){
   <div class="title">
     <icon [name]="isEnemy ? ICONS.ENEMY : ICONS.MY_POKEMON" [size]="24"></icon>
     <p>{{ isEnemy ? "Oponente" : "Mi pokemon" }}</p>
   </div>
+  }
   <div class="types">
+    @for (t of types; track $index) {
     <div class="type">
       <badge-type
-        [type]="type"
+        [type]="t"
         [showRing]="true"
         [showGlow]="true"
         [size]="32"
       ></badge-type>
-      <span>{{ type }}</span>
+      <span>{{ t }}</span>
     </div>
+    }
   </div>
+  <icon [name]="ICONS.CLOSE" class="icon-close" (click)="clear()"></icon>
 </div>

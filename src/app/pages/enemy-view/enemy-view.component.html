@@ -4,10 +4,12 @@
   <!-- LUCES / DECORADO -->
   @if (someSelected()) {
   <div class="blur-light left">
-    <blur-light [type]="selected()"></blur-light>
+    <blur-light [type]="selected()[0]"></blur-light>
   </div>
   <div class="blur-light right">
-    <blur-light [type]="selected()"></blur-light>
+    <blur-light
+      [type]="selected().length === 2 ? selected()[1] : selected()[0]"
+    ></blur-light>
   </div>
   }
 
@@ -44,7 +46,10 @@
   <!-- ---------- TIPO SELECCIONADO ---------- -->
   <div class="selected-container">
     <div class="selected-type">
-      <card-selected-types [type]="selected()"></card-selected-types>
+      <card-selected-types
+        [types]="selected()"
+        (clearSelection)="clearSelection()"
+      ></card-selected-types>
     </div>
     <!-- LISTA DE RECOMENDADOS -->
     <div class="list-container">

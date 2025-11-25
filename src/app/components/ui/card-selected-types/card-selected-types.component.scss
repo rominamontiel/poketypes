@@ -9,6 +9,7 @@
   @include display-flex(1, 1);
   justify-content: space-between;
   padding: $m-16;
+  position: relative;
 
   .title {
     @include display-flex(1, 1);
@@ -21,14 +22,27 @@
   }
 
   .types {
+    @include display-flex(1, 1);
+    gap: $m-24;
+
     .type {
       @include display-flex(1, 1);
-      gap: $m-16;
+      gap: ($m-8 + $m-4);
+      @include animation-opacity(0.3);
+
       span {
         @extend .paragraph-01-medium;
         color: $color-white-100;
         text-transform: uppercase;
       }
     }
+  }
+
+  .icon-close {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    opacity: 0.8;
+    cursor: pointer;
   }
 }

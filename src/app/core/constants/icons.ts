@@ -7,4 +7,5 @@ export enum ICONS {
   SHIELD_NO = 'shield_no',
   SWORDS = 'swords',
   TOUCH = 'touch',
+  CLOSE = 'close'
 }

@@ -1,0 +1,213 @@
+@import "../../styles/main.scss";
+
+* {
+  transition: all 0.15s ease-in-out;
+}
+
+section {
+  padding: $m-32 $m-16;
+  padding-bottom: $m-96;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
+
+  .intro-text {
+    text-align: center;
+    @extend .subheading-01-regular;
+    margin-bottom: $m-24;
+  }
+
+  //BUSCADOR INPUT
+  .input-container {
+    margin-bottom: $m-32;
+    position: relative;
+
+    icon {
+      position: absolute;
+      left: $m-16;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.4;
+    }
+
+    .icon-close{
+      left: initial;
+      right: $m-8;
+
+    }
+
+    input {
+      border: 1px solid $color-white-50;
+      background-color: transparent;
+      height: $m-40;
+      border-radius: $m-32;
+      width: 100%;
+      padding-left: $m-48;
+      @extend .subheading-01-regular;
+      color: $color-white-100;
+
+      &::placeholder {
+        @extend .subheading-01-regular;
+        color: $color-white-50;
+      }
+    }
+
+    .results {
+      width: 100%;
+      height: auto;
+      max-height: calc(100vh - $m-40 - $m-24 - $m-24 - $m-32 - $m-32);
+      position: absolute;
+      background-color: $color-black-800;
+      border: 1px solid $color-white-30;
+      z-index: 10;
+      border-radius: $m-8;
+      overflow-y: auto;
+
+      p {
+        padding: 0 $m-8;
+        height: $m-40;
+        width: 100%;
+        border-bottom: 1px solid $color-white-30;
+        @extend .subheading-01-regular;
+        line-height: $m-40;
+        color: $color-white-80;
+        @include text-ellipsis;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  //MENSAJE DE "NINGUN TIPO SELECCIONADO"
+  .empty {
+    width: 100%;
+    height: 500px;
+    @include display-flex(1, 1);
+    flex-direction: column;
+    gap: $m-24;
+    padding: $m-24;
+    @include animation-opacity(1);
+
+    icon {
+      opacity: 0.3;
+    }
+
+    p {
+      @extend .subheading-01-medium;
+      text-transform: uppercase;
+      color: $color-white-40;
+      text-align: center;
+    }
+  }
+
+  .blur-light {
+    position: absolute;
+    @include user-select-none();
+    z-index: -1;
+    @include animation-opacity(0.3);
+
+    &.left {
+      left: -30%;
+      top: -20%;
+    }
+
+    &.right {
+      right: -40%;
+      top: 10%;
+    }
+  }
+
+  //UNO O DOS TIPOS SELECCIONADOS
+  .selected-container {
+    .selected-type {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr); // imagen fija + resto fluido
+      grid-auto-rows: auto;
+      gap: 16px;
+      border-radius: 20px;
+      margin-bottom: $m-32;
+
+      .header,
+      .profile,
+      .types {
+        background-color: $color-white-10;
+        border: 1px solid $color-white-20;
+        border-radius: $m-16;
+      }
+
+      .header {
+        grid-column: 1 / -1; // ocupa las dos columnas
+        align-self: center;
+        height: $m-40;
+        @include display-flex(1, 1);
+        gap: $m-8;
+
+        h2 {
+          @extend .heading-01-semibold;
+          text-transform: uppercase;
+        }
+        span {
+          @extend .heading-01-semibold;
+          text-transform: uppercase;
+          color: $color-white-50;
+        }
+      }
+
+      .profile {
+        width: 96px;
+        height: 96px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .types {
+        align-self: center;
+        justify-self: stretch;
+        height: $m-96;
+        @include display-flex(1, 1);
+        gap: $m-16;
+
+        .type {
+          @include display-flex(1, 1);
+          gap: $m-16;
+          span {
+            @extend .paragraph-01-medium;
+            color: $color-white-100;
+            text-transform: uppercase;
+          }
+        }
+
+        .slash{
+            font-size: $m-32;
+            font-weight: 600;
+        }
+      }
+    }
+
+    .list-container {
+      @include display-flex(false, false);
+      margin-top: $m-16;
+      gap: $m-16;
+
+      .list {
+        width: 50%;
+        max-width: 50%;
+        overflow-x: hidden;
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  section {
+    overflow-x: visible;
+    .selected-container {
+      .list-container {
+        margin-top: $m-24;
+        gap: $m-24;
+      }
+    }
+  }
+}

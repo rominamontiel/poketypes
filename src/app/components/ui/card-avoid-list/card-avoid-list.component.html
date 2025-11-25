@@ -11,6 +11,7 @@
       </span>
     </div>
   </div>
+  @if (list.length > 0) {
   <div class="list">
     @for (item of list; track $index) {
     <div class="type">
@@ -23,4 +24,7 @@
     </div>
     }
   </div>
+  } @else {
+  <div class="empty">Neutral para todos los tipos</div>
+  }
 </div>

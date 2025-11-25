@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { BadgeTypeComponent } from '../badge-type/badge-type.component';
 import { TYPES } from '../../../core/models/types.model';
@@ -12,7 +12,13 @@ import { ICONS } from '../../../core/constants/icons';
   styleUrl: './card-selected-types.component.scss',
 })
 export class CardSelectedTypesComponent {
-  @Input() type: TYPES | undefined;
+  @Input() types: TYPES[] | undefined;
   @Input() isEnemy: boolean = true;
+  @Input() isTitleVisible: boolean = true;
+  @Output() clearSelection: EventEmitter<void> = new EventEmitter<void>();
   ICONS = ICONS;
+
+  clear() {
+    this.clearSelection.emit();
+  }
 }

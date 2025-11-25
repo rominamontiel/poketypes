@@ -79,7 +79,7 @@
 @mixin animation-child-delay {
   @for $i from 1 through 100 {
     &:nth-child(#{$i}n) {
-      animation-delay: #{$i * 0.05}s;
+      animation-delay: #{$i * 0.02}s;
     }
   }
 }

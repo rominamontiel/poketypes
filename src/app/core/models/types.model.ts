@@ -23,7 +23,7 @@ export enum TYPES {
 export const LIST_TYPES: TYPES[] = Object.values(TYPES);
 
 //INGLES → ESPAÑOL
-export const MAP_EN_ES_TYPES = {
+export const MAP_EN_ES_TYPES: Record<string, TYPES> = {
   steel: TYPES.ACERO,
   water: TYPES.AGUA,
   bug: TYPES.BICHO,
@@ -33,7 +33,7 @@ export const MAP_EN_ES_TYPES = {
   fire: TYPES.FUEGO,
   fairy: TYPES.HADA,
   ice: TYPES.HIELO,
-  fight: TYPES.LUCHA,
+  fighting: TYPES.LUCHA,
   normal: TYPES.NORMAL,
   grass: TYPES.PLANTA,
   psychic: TYPES.PSIQUICO,
